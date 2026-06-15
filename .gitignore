@@ -1,0 +1,12 @@
+# Claude Code local files (memory, settings) — never commit
+.claude/
+
+# Stray pasted images / screenshots
+Pasted image*.png
+Screenshot*.png
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.tmp
+*~

@@ -1,0 +1,183 @@
+{
+  "project": {
+    "name": "MATISSE",
+    "heroTitle": "Contributions to MATISSE",
+    "fullName": "Model-based engineering of Digital Twins for early verification and validation of Industrial Systems",
+    "tagline": "",
+    "programme": "Co-funded by the European Union · Chips Joint Undertaking (Chips JU)",
+    "grantNumber": "",
+    "about": "MATISSE is a European Chips Joint Undertaking research project bringing together over 30 partners from 7 countries to develop an advanced framework for efficient engineering and validation of industrial systems using Digital Twins. It integrates digital-twin technology with model-based, data-driven, and cloud approaches to simulate, test, and predict system behaviour across industrial contexts.\n\nThis page collects the artifacts produced by the University of Innsbruck team as part of its contribution to MATISSE.",
+    "projectWebsite": "https://matisse-kdt.eu",
+    "affiliation": "University of Innsbruck",
+    "startDate": "",
+    "endDate": "",
+    "contactEmail": "",
+    "fundingNotice": "The project is supported by the Chips Joint Undertaking (Chips JU) and its members including top-up funding by Vinnova (SE), Österreichische Forschungsförderungsgesellschaft mbH (FFG) (AT), Business Finland (FI), Ministry of Universities and Research (IT), Fundação para a Ciência e a Tecnologia (PT), Tübitak (TR).\n\nViews and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the granting authority. Neither the European Union nor the granting authority can be held responsible for them."
+  },
+  "artifacts": [
+    {
+      "id": "T2C",
+      "title": "Twin2Clouds",
+      "type": "orchestrator",
+      "subtitle": "Federated Cloud Placement Optimizer",
+      "description": "Optimizes the placement of cloud digital twins across federated cloud providers.",
+      "uses": ["M_COST", "M_5L"],
+      "links": [
+        {"label": "Paper", "url": "https://www.computer.org/csdl/proceedings-article/models-c/2025/799000a264/2ckIbFiyNHy"},
+        {"label": "GitHub", "url": "https://github.com/cloud-DTs/digital-twin-manager"}
+      ]
+    },
+    {
+      "id": "CD",
+      "title": "Cloud Deployer",
+      "type": "orchestrator",
+      "description": "Toolchain that turns SysML models into CloudTwin models and deploys them to the cloud.",
+      "uses": ["SYSML2CTM", "CTM2AWS"],
+      "links": []
+    },
+    {
+      "id": "TR",
+      "title": "TwinRobust",
+      "type": "orchestrator",
+      "description": "Toolchain for robustness verification & validation of digital twins, covering test generation, execution, and evaluation.",
+      "uses": ["SYSML2SIM", "SIMRUN", "KPIROB"],
+      "links": []
+    },
+    {
+      "id": "TM",
+      "title": "TwinMind",
+      "type": "orchestrator",
+      "subtitle": "Modeling Copilot",
+      "description": "AI-assisted modeling copilot supporting the creation of system and digital-twin models.",
+      "uses": ["M_SRIA", "M_AAS"],
+      "links": []
+    },
+
+    {
+      "id": "SYSML2CTM",
+      "title": "SysML2CTM",
+      "type": "tool",
+      "subtitle": "SysML-to-CloudTwinModel Converter",
+      "description": "Converts SysML system models into CloudTwin models.",
+      "links": []
+    },
+    {
+      "id": "CTM2AWS",
+      "title": "CTM2AWS",
+      "type": "tool",
+      "subtitle": "CloudTwinModel-to-AWS",
+      "description": "Deploys CloudTwin models to AWS infrastructure.",
+      "uses": ["M_5L"],
+      "links": []
+    },
+    {
+      "id": "SYSML2SIM",
+      "title": "SysML2SIM",
+      "type": "tool",
+      "subtitle": "SysML-to-Microgrid-Simulator Converter",
+      "description": "Test generation service: converts SysML models into microgrid simulator inputs.",
+      "uses": ["M_DTP", "M_DTPv2","M_CS", "M_ENV"],
+      "links": []
+    },
+    {
+      "id": "SIMRUN",
+      "title": "SimRunner",
+      "type": "tool",
+      "subtitle": "Microgrid Simulator Runner",
+      "description": "Executes simulation runs on the microgrid simulator.",
+      "uses": ["M_SIN"],
+      "links": []
+    },
+    {
+      "id": "KPIROB",
+      "title": "KPIRobust",
+      "type": "tool",
+      "subtitle": "Robustness KPI Evaluator",
+      "description": "Test evaluation service: computes robustness KPIs from simulation results.",
+      "uses": ["M_SRES", "M_KPI"],
+      "links": []
+    },
+
+    {
+      "id": "M_COST",
+      "title": "Cost and Pricing Primitive Model",
+      "type": "model",
+      "description": "Foundational model of cloud cost and pricing primitives.",
+      "links": [
+         {"label": "Paper", "url": "https://www.computer.org/csdl/proceedings-article/models-c/2025/799000a264/2ckIbFiyNHy"}
+      ]
+    },
+    {
+      "id": "M_5L",
+      "title": "Five-Layer Cloud Twin Model",
+      "type": "model",
+      "description": "Layered reference model for cloud digital twins.",
+      "links": [
+         {"label": "Paper", "url": "https://www.computer.org/csdl/proceedings-article/models-c/2025/799000a264/2ckIbFiyNHy"}
+      ]
+    },
+    {
+      "id": "M_DTP",
+      "title": "DigitalTwinProfile for SysMLv1",
+      "type": "model",
+      "description": "SysML profile v1 for describing digital twins.",
+      "links": []
+    },
+    {
+      "id": "M_DTPv2",
+      "title": "DigitalTwinProfile for SysMLv2",
+      "type": "model",
+      "description": "SysML profile v2 for describing digital twins.",
+      "links": []
+    },
+    {
+      "id": "M_CS",
+      "title": "Control Strategy Model",
+      "type": "model",
+      "description": "Model of the system's control strategies, used for test generation.",
+      "links": []
+    },
+    {
+      "id": "M_ENV",
+      "title": "Environmental Condition Model",
+      "type": "model",
+      "description": "Model of environmental conditions for scenario and test generation.",
+      "links": []
+    },
+    {
+      "id": "M_SIN",
+      "title": "Microgrid Simulator Input Model",
+      "type": "model",
+      "description": "Input model consumed by the microgrid simulator runner.",
+      "links": []
+    },
+    {
+      "id": "M_SRES",
+      "title": "Simulation Result Model",
+      "type": "model",
+      "description": "Model capturing the outputs of microgrid simulation runs.",
+      "links": []
+    },
+    {
+      "id": "M_KPI",
+      "title": "KPI Model",
+      "type": "model",
+      "description": "Model defining the robustness KPIs evaluated by the toolchain.",
+      "links": []
+    },
+    {
+      "id": "M_SRIA",
+      "title": "SRIA CPS SoS Model",
+      "type": "model",
+      "description": "Reference model for CPS System-of-Systems aligned with the SRIA.",
+      "links": []
+    },
+    {
+      "id": "M_AAS",
+      "title": "AAS",
+      "type": "model",
+      "description": "Asset Administration Shell model.",
+      "links": []
+    }
+  ]
+}

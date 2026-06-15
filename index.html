@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University of Innsbruck — Artifacts within MATISSE</title>
+  <meta name="description" content="Artifacts produced by the University of Innsbruck team within the MATISSE Chips JU project." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#artifacts">Skip to artifacts</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="brand-home" href="#top" id="top">
+          <img class="brand-logo" src="assets/uibk-logo.svg" alt="University of Innsbruck" />
+        </a>
+        <span class="brand-affil">within the
+          <a href="https://matisse-kdt.eu" target="_blank" rel="noopener">MATISSE</a> project</span>
+      </div>
+      <nav class="site-nav">
+        <a href="#about">About</a>
+        <a href="#overview">Overview</a>
+        <a href="#artifacts">Artifacts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow" id="hero-programme"></p>
+        <h1 id="hero-title">MATISSE</h1>
+        <p class="hero-full" id="hero-full"></p>
+        <p class="hero-tagline" id="hero-tagline"></p>
+        <div class="hero-meta" id="hero-meta"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About</h2>
+        <div id="about-text" class="prose"></div>
+      </div>
+    </section>
+
+    <section id="overview" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Artifacts at a glance</h2>
+          <p class="section-sub">
+            How the Innsbruck artifacts fit together — exploitable results build on
+            tools, which in turn build on foundational models.
+          </p>
+        </div>
+
+        <div class="legend">
+          <span class="legend-item"><span class="swatch sw-orchestrator"></span> Exploitable result</span>
+          <span class="legend-item"><span class="swatch sw-tool"></span> Tool</span>
+          <span class="legend-item"><span class="swatch sw-model"></span> Model / foundation</span>
+        </div>
+
+        <div class="diagram-wrap">
+          <pre class="mermaid" id="diagram"></pre>
+        </div>
+        <p class="diagram-hint">Ctrl + scroll to zoom · drag to pan · click a node to jump to its details below.</p>
+      </div>
+    </section>
+
+    <section id="artifacts" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Artifacts</h2>
+          <p class="section-sub">Outputs produced by the Innsbruck team.</p>
+        </div>
+
+        <div class="filters" id="filters" role="group" aria-label="Filter artifacts by type"></div>
+
+        <div class="artifact-grid" id="artifact-grid" aria-live="polite"></div>
+
+        <p class="empty-state" id="empty-state" hidden>No artifacts match this filter yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img class="footer-logo" src="assets/light-small-logo.svg" alt="MATISSE" height="40" />
+      <p id="footer-funding"></p>
+      <p class="footer-meta">© <span id="year"></span> MATISSE · University of Innsbruck</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: "base",
+      flowchart: { useMaxWidth: true, htmlLabels: true, nodeSpacing: 45, rankSpacing: 75 },
+      themeVariables: {
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+        fontSize: "16px",
+      },
+    });
+
+    // The diagram is GENERATED from artifacts.json — the single source of truth.
+    // Nodes (id/title/subtitle), tier colors (type), arrows (each artifact's
+    // `uses`) and click targets are all derived here, then handed to Mermaid.
+    const TIER_STYLE = {
+      orchestrator: "fill:#0b5cab,color:#ffffff,stroke:#073f76,stroke-width:1px",
+      tool: "fill:#fdf3d0,color:#5a4a12,stroke:#d9b441,stroke-width:1px",
+      model: "fill:#ffffff,color:#16202c,stroke:#cbd5e1,stroke-width:1px",
+    };
+
+    function buildDiagram(artifacts) {
+      const esc = (s) => String(s).replace(/"/g, "'");
+      const ids = new Set(artifacts.filter((a) => a.id).map((a) => a.id));
+      const byTier = {};
+      const lines = ["flowchart TB"];
+
+      // Nodes
+      for (const a of artifacts) {
+        if (!a.id) continue;
+        const sub = a.subtitle ? `<br/><small>${esc(a.subtitle)}</small>` : "";
+        lines.push(`  ${a.id}["${esc(a.title || a.id)}${sub}"]`);
+        if (TIER_STYLE[a.type]) (byTier[a.type] ||= []).push(a.id);
+      }
+      // Arrows (skip any target that isn't a known node)
+      for (const a of artifacts) {
+        if (!a.id || !Array.isArray(a.uses)) continue;
+        for (const child of a.uses) {
+          if (ids.has(child)) lines.push(`  ${a.id} --> ${child}`);
+        }
+      }
+      // Tier colors
+      for (const [tier, style] of Object.entries(TIER_STYLE)) {
+        lines.push(`  classDef ${tier} ${style};`);
+      }
+      for (const [tier, list] of Object.entries(byTier)) {
+        lines.push(`  class ${list.join(",")} ${tier};`);
+      }
+      // Clicks: jump to the artifact's card, which lists all of its links
+      for (const a of artifacts) {
+        if (!a.id) continue;
+        lines.push(`  click ${a.id} href "#a-${a.id}" "${esc(a.title || a.id)}"`);
+      }
+      return lines.join("\n");
+    }
+
+    const diagramEl = document.getElementById("diagram");
+    try {
+      const res = await fetch("artifacts.json", { cache: "no-cache" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      diagramEl.textContent = buildDiagram(data.artifacts || []);
+      await mermaid.run({ nodes: [diagramEl] });
+    } catch (err) {
+      console.error("Failed to build the diagram:", err);
+      diagramEl.classList.remove("mermaid");
+      diagramEl.insertAdjacentHTML(
+        "afterend",
+        '<p class="empty-state">Could not load the diagram. If viewing locally, serve over HTTP (e.g. <code>python3 -m http.server</code>).</p>'
+      );
+    }
+
+    // Add pan & zoom (drag + buttons; Ctrl/Cmd + wheel to zoom) to the diagram.
+    const svg = document.querySelector("#diagram svg");
+    if (svg) {
+      svg.style.maxWidth = "none";
+      svg.style.width = "100%";
+      svg.style.height = "100%";
+      const { default: svgPanZoom } = await import(
+        "https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/+esm"
+      );
+      const pz = svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.4,
+        maxZoom: 10,
+        zoomScaleSensitivity: 0.3,
+        // Don't hijack plain wheel — let the page scroll over the figure.
+        mouseWheelZoomEnabled: false,
+      });
+      // Zoom only when Ctrl (or Cmd) is held, centered on the cursor.
+      svg.addEventListener(
+        "wheel",
+        (e) => {
+          if (!e.ctrlKey && !e.metaKey) return; // plain scroll → page scrolls
+          e.preventDefault();
+          const rect = svg.getBoundingClientRect();
+          const point = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+          pz.zoomAtPointBy(e.deltaY < 0 ? 1.2 : 1 / 1.2, point);
+        },
+        { passive: false }
+      );
+      window.addEventListener("resize", () => {
+        pz.resize();
+        pz.fit();
+        pz.center();
+      });
+    }
+  </script>
+</body>
+</html>
