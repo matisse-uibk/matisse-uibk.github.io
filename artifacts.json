@@ -20,7 +20,7 @@
       "title": "Twin2Clouds",
       "type": "orchestrator",
       "subtitle": "Federated Cloud Placement Optimizer",
-      "description": "Optimizes the placement of cloud digital twins across federated cloud providers.",
+      "description": "Framework for optimizing the placement of digital twin components across cloud environments. It supports decision-making based on layered cloud twin models and resource constraints.",
       "uses": ["M_COST", "M_5L"],
       "links": [
         {"label": "Paper", "url": "https://www.computer.org/csdl/proceedings-article/models-c/2025/799000a264/2ckIbFiyNHy"},
@@ -31,7 +31,7 @@
       "id": "CD",
       "title": "Cloud Deployer",
       "type": "orchestrator",
-      "description": "Toolchain that turns SysML models into CloudTwin models and deploys them to the cloud.",
+      "description": "Toolchain that transforms digital twin models into deployable cloud infrastructure and deploys them on AWS.",
       "uses": ["SYSML2CTM", "CTM2AWS"],
       "links": []
     },
@@ -39,7 +39,7 @@
       "id": "TR",
       "title": "TwinRobust",
       "type": "orchestrator",
-      "description": "Toolchain for robustness verification & validation of digital twins, covering test generation, execution, and evaluation.",
+      "description": "Framework for evaluating robustness of digital twins using simulation results and KPI-based analysis to assess system behavior.",
       "uses": ["SYSML2SIM", "SIMRUN", "KPIROB"],
       "links": []
     },
@@ -48,7 +48,7 @@
       "title": "TwinMind",
       "type": "orchestrator",
       "subtitle": "Modeling Copilot",
-      "description": "AI-assisted modeling copilot supporting the creation of system and digital-twin models.",
+      "description": "AI-assisted modeling tool that supports creation and refinement of digital twin models through model-based engineering workflows.",
       "uses": ["M_SRIA", "M_AAS"],
       "links": []
     },
@@ -58,7 +58,7 @@
       "title": "SysML2CTM",
       "type": "tool",
       "subtitle": "SysML-to-CloudTwinModel Converter",
-      "description": "Converts SysML system models into CloudTwin models.",
+      "description": "Converts SysML models into a cloud-oriented digital twin representation based on a layered cloud twin abstraction.",
       "links": []
     },
     {
@@ -66,7 +66,7 @@
       "title": "CTM2AWS",
       "type": "tool",
       "subtitle": "CloudTwinModel-to-AWS",
-      "description": "Deploys CloudTwin models to AWS infrastructure.",
+      "description": "Maps cloud digital twin models to AWS deployment infrastructure and instantiates cloud resources.",
       "uses": ["M_5L"],
       "links": []
     },
@@ -75,7 +75,7 @@
       "title": "SysML2SIM",
       "type": "tool",
       "subtitle": "SysML-to-Microgrid-Simulator Converter",
-      "description": "Test generation service: converts SysML models into microgrid simulator inputs.",
+      "description": "Generates simulation-ready inputs from SysML-based system models for execution in simulation environments.",
       "uses": ["M_DTP", "M_DTPv2","M_CS", "M_ENV"],
       "links": []
     },
@@ -84,7 +84,7 @@
       "title": "SimRunner",
       "type": "tool",
       "subtitle": "Microgrid Simulator Runner",
-      "description": "Executes simulation runs on the microgrid simulator.",
+      "description": "Executes simulation models and produces structured runtime results for further analysis.",
       "uses": ["M_SIN"],
       "links": []
     },
@@ -93,7 +93,7 @@
       "title": "KPIRobust",
       "type": "tool",
       "subtitle": "Robustness KPI Evaluator",
-      "description": "Test evaluation service: computes robustness KPIs from simulation results.",
+      "description": "Computes robustness and performance KPIs from simulation outputs to evaluate system quality and behavior.",
       "uses": ["M_SRES", "M_KPI"],
       "links": []
     },
@@ -102,7 +102,7 @@
       "id": "M_COST",
       "title": "Cost and Pricing Primitive Model",
       "type": "model",
-      "description": "Foundational model of cloud cost and pricing primitives.",
+      "description": "Defines foundational cost and pricing elements used for modeling resource consumption in cloud-based digital twins.",
       "links": [
          {"label": "Paper", "url": "https://www.computer.org/csdl/proceedings-article/models-c/2025/799000a264/2ckIbFiyNHy"}
       ]
@@ -111,7 +111,7 @@
       "id": "M_5L",
       "title": "Five-Layer Cloud Twin Model",
       "type": "model",
-      "description": "Layered reference model for cloud digital twins.",
+      "description": "Provides a layered abstraction for structuring cloud digital twins across key functional domains such as data, processing, and management.",
       "links": [
          {"label": "Paper", "url": "https://www.computer.org/csdl/proceedings-article/models-c/2025/799000a264/2ckIbFiyNHy"}
       ]
@@ -120,63 +120,63 @@
       "id": "M_DTP",
       "title": "DigitalTwinProfile for SysMLv1",
       "type": "model",
-      "description": "SysML profile v1 for describing digital twins.",
+      "description": "SysML v1 profile for modeling and structuring digital twin systems in a standardized way.",
       "links": []
     },
     {
       "id": "M_DTPv2",
       "title": "DigitalTwinProfile for SysMLv2",
       "type": "model",
-      "description": "SysML profile v2 for describing digital twins.",
+      "description": "SysML v2 profile supporting next-generation digital twin modeling with improved semantics and structure.",
       "links": []
     },
     {
       "id": "M_CS",
       "title": "Control Strategy Model",
       "type": "model",
-      "description": "Model of the system's control strategies, used for test generation.",
+      "description": "Represents system control logic used for simulation, analysis, and behavior specification.",
       "links": []
     },
     {
       "id": "M_ENV",
       "title": "Environmental Condition Model",
       "type": "model",
-      "description": "Model of environmental conditions for scenario and test generation.",
+      "description": "Defines environmental factors and conditions that influence system behavior in simulations.",
       "links": []
     },
     {
       "id": "M_SIN",
       "title": "Microgrid Simulator Input Model",
       "type": "model",
-      "description": "Input model consumed by the microgrid simulator runner.",
+      "description": "Defines structured inputs required for executing microgrid simulation scenarios.",
       "links": []
     },
     {
       "id": "M_SRES",
       "title": "Simulation Result Model",
       "type": "model",
-      "description": "Model capturing the outputs of microgrid simulation runs.",
+      "description": "Captures and structures outputs generated from simulation execution for analysis.",
       "links": []
     },
     {
       "id": "M_KPI",
       "title": "KPI Model",
       "type": "model",
-      "description": "Model defining the robustness KPIs evaluated by the toolchain.",
+      "description": "Defines key performance indicators used to evaluate system performance and robustness.",
       "links": []
     },
     {
       "id": "M_SRIA",
       "title": "SRIA CPS SoS Model",
       "type": "model",
-      "description": "Reference model for CPS System-of-Systems aligned with the SRIA.",
+      "description": "Reference model for cyber-physical systems of systems aligned with SRIA concepts.",
       "links": []
     },
     {
       "id": "M_AAS",
       "title": "AAS",
       "type": "model",
-      "description": "Asset Administration Shell model.",
+      "description": "Standardized digital representation of industrial assets and their properties for interoperability in digital twin ecosystems.",
       "links": []
     }
   ]
