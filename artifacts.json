@@ -49,7 +49,7 @@
       "type": "orchestrator",
       "subtitle": "Modeling Copilot",
       "description": "AI-assisted modeling tool that supports creation and refinement of digital twin models through model-based engineering workflows.",
-      "uses": ["M_SRIA", "M_AAS"],
+      "uses": ["M_DTPv2"],
       "links": []
     },
 
@@ -59,7 +59,8 @@
       "type": "tool",
       "subtitle": "SysML-to-CloudTwinModel Converter",
       "description": "Converts SysML models into a cloud-oriented digital twin representation based on a layered cloud twin abstraction.",
-      "links": []
+      "links": [],
+      "uses": ["M_DTP", "M_DTPv2"] 
     },
     {
       "id": "CTM2AWS",
@@ -164,20 +165,6 @@
       "type": "model",
       "description": "Defines key performance indicators used to evaluate system performance and robustness.",
       "links": []
-    },
-    {
-      "id": "M_SRIA",
-      "title": "SRIA CPS SoS Model",
-      "type": "model",
-      "description": "Reference model for cyber-physical systems of systems aligned with SRIA concepts.",
-      "links": []
-    },
-    {
-      "id": "M_AAS",
-      "title": "AAS",
-      "type": "model",
-      "description": "Standardized digital representation of industrial assets and their properties for interoperability in digital twin ecosystems.",
-      "links": []
     }
-  ]
+ ]
 }
